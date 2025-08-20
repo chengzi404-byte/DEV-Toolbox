@@ -154,21 +154,18 @@ class Package:
             # Retry download without SSL verification
             try:
                 responce = requests.get(url, stream=True, verify=False)
-                if responce.status_code == 200:
-                    file_name = url.split("/")[-1]
-                    file_path = save_path / file_name
-                    
-                    with open(file_path, "wb") as file:
-                        for chunk in responce.iter_content(chunk_size=1024):
-                            if chunk:
-                                file.write(chunk)
-                                self.progess += len(chunk)
-                    
-                    print(f"[INFO] Application {bits} downloaded successfully: {file_path}")
-                    os.system(f'start "" "{file_path}"')  # Open the installer
-                    showinfo("下载完成", f"应用 {bits} 下载完成\n已保存到: {file_path}")
-                else:
-                    raise Exception("Download failed with status code: {}".format(responce.status_code))
+                file_name = url.split("/")[-1]
+                file_path = save_path / file_name
+                
+                with open(file_path, "wb") as file:
+                    for chunk in responce.iter_content(chunk_size=1024):
+                        if chunk:
+                            file.write(chunk)
+                            self.progess += len(chunk)
+                
+                print(f"[INFO] Application {bits} downloaded successfully: {file_path}")
+                os.system(f'start "" "{file_path}"')  # Open the installer
+                showinfo("下载完成", f"应用 {bits} 下载完成\n已保存到: {file_path}")
             except Exception as e:
                 print(f"[ERROR] Download failed: {e}")
                 showerror("下载失败", f"下载应用 {bits} 失败: {e}")
@@ -279,7 +276,7 @@ class Package:
             window.mainloop()
         
         except Exception as e:
-            showerror("错误", f"程序运行时发生错误: {e}\n\n 请在 Github 提交 issue 反馈。")
+            showerror("错误", f"程序运行时发生错误: {e} \n\n 请在 Github 提交 issue 反馈。")
 
 if __name__ == "__main__":
     package = Package()
