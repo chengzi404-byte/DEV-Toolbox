@@ -22,5 +22,13 @@
     "Vitrual box": [
         "https://mirrors.tuna.tsinghua.edu.cn/virtualbox/7.2.0/VirtualBox-7.2.0-170228-Win.exe",
         false
+    ],
+    "Wireshark": [
+        "https://mirrors.tuna.tsinghua.edu.cn/wireshark/win64/Wireshark-latest-x64.exe",
+        false
+    ],
+    "Rustdesk": [
+        false,
+        "https://mirrors.tuna.tsinghua.edu.cn/github-release/rustdesk/rustdesk/LatestRelease/rustdesk-1.4.1-x86_64.exe"
     ]
 }
