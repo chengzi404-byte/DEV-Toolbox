@@ -1,0 +1,26 @@
+{
+    "atom": [
+        "https://mirrors.tuna.tsinghua.edu.cn/github-release/atom/atom/LatestRelease/AtomSetup-x64.exe",
+        "https://mirrors.tuna.tsinghua.edu.cn/github-release/atom/atom/LatestRelease/AtomSetup.exe"
+    ],
+    "blender": [
+        "https://mirrors.tuna.tsinghua.edu.cn/blender/blender-release/Blender4.5/blender-4.5.0-windows-x64.msi",
+        false
+    ],
+    "git": [
+        "https://mirrors.tuna.tsinghua.edu.cn/github-release/git-for-windows/git/LatestRelease/Git-2.51.0-64-bit.exe",
+        false
+    ],
+    "vscode": [
+        "https://mirrors.tuna.tsinghua.edu.cn/github-release/VSCodium/vscodium/LatestRelease/VSCodium-x64-1.103.15539.msi",
+        "https://mirrors.tuna.tsinghua.edu.cn/github-release/VSCodium/vscodium/LatestRelease/VSCodium-ia32-1.103.15539.msi"
+    ],
+    "docker": [
+        "https://mirrors.tuna.tsinghua.edu.cn/docker-ce/win/static/stable/x86_64/docker-28.3.3.zip",
+        false
+    ],
+    "Vitrual box": [
+        "https://mirrors.tuna.tsinghua.edu.cn/virtualbox/7.2.0/VirtualBox-7.2.0-170228-Win.exe",
+        false
+    ]
+}

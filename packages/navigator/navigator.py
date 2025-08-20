@@ -109,6 +109,65 @@ class Package:
             except Exception as e:
                 print(f"[ERROR] Download failed: {e}")
                 showerror("下载失败", f"下载 Python {bits} 失败: {e}")
+
+    def download_application(self, amd64_url, win32_url, name, bits="amd64"):
+        save_path = Path(__file__).parent.parent.parent / "downloads" / name
+
+        if not os.path.exists(save_path):
+            os.makedirs(save_path)
+        
+        if bits == "amd64":
+            url = amd64_url
+        elif bits == "win32":
+            url = win32_url
+        else:
+            raise ValueError("Unsupported architecture: {}".format(bits))
+
+        try:
+            responce = requests.get(url, stream=True)
+            self.total = len(responce.iter_content(chunk_size=1024))
+            
+            if responce.status_code == 200:
+                file_name = url.split("/")[-1]
+                file_path = save_path / file_name
+                
+                with open(file_path, "wb") as file:
+                    for chunk in responce.iter_content(chunk_size=1024):
+                        if chunk:
+                            file.write(chunk)
+                            self.progess += len(chunk)
+                
+                print(f"[INFO] Application {bits} downloaded successfully: {file_path}")
+
+                os.system(f'start "" "{file_path}"')  # Open the installer
+                showinfo("下载完成", f"应用 {bits} 下载完成\n已保存到: {file_path}")
+            else:
+                print(f"[ERROR] Failed to download application {bits}. Status code: {responce.status_code}")
+                raise Exception("Download failed with status code: {}".format(responce.status_code))
+        except requests.exceptions.SSLError as e:
+            print(f"[ERROR] SSL Error: {e}")
+            print(f"[WARN]  Trying to download without SSL verification...")
+            # Retry download without SSL verification
+            try:
+                responce = requests.get(url, stream=True, verify=False)
+                if responce.status_code == 200:
+                    file_name = url.split("/")[-1]
+                    file_path = save_path / file_name
+                    
+                    with open(file_path, "wb") as file:
+                        for chunk in responce.iter_content(chunk_size=1024):
+                            if chunk:
+                                file.write(chunk)
+                                self.progess += len(chunk)
+                    
+                    print(f"[INFO] Application {bits} downloaded successfully: {file_path}")
+                    os.system(f'start "" "{file_path}"')  # Open the installer
+                    showinfo("下载完成", f"应用 {bits} 下载完成\n已保存到: {file_path}")
+                else:
+                    raise Exception("Download failed with status code: {}".format(responce.status_code))
+            except Exception as e:
+                print(f"[ERROR] Download failed: {e}")
+                showerror("下载失败", f"下载应用 {bits} 失败: {e}")
     
     def main(self):
         def __download_python():
