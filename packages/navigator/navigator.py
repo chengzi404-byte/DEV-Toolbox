@@ -176,6 +176,7 @@ class Package:
             search_button.grid(row=4, column=1)
 
             pip_table = Treeview(python_tab, columns=("name", "des"), show="headings", height=5)
+            pip_table.bind("<Double-1>", lambda e: os.system(f'pip install {pip_table.item(pip_table.selection()[0], "values")[0]}'))
             pip_table.heading("name", text="库名")
             pip_table.heading("des", text="描述")
             pip_table.column("name", width=100)
@@ -184,6 +185,10 @@ class Package:
 
             for key, value in self.pip_libraries.items():
                 pip_table.insert("", "end", values=(key, value))
+            
+            # Application download tab (Placeholder)
+            app_tab = Frame(notebook)
+            notebook.add(app_tab, text="🚀 下载应用")
 
             window.mainloop()
         
