@@ -12,7 +12,7 @@ import platform
 import threading
 import json
 
-__ver__ = "0.1.0"
+__ver__ = "v0.1.0"
 __package__ = "navigator"
 __author__ = "System"
 __email__ = "Remaining@2925.com"
@@ -33,6 +33,10 @@ class Package:
         # Loading pip libraries
         with open(Path(__file__).parent / "pip.json", "r", encoding="utf-8") as f:
             self.pip_libraries = json.load(f)
+        
+        # Load app list
+        with open(Path(__file__).parent / "app_url.json", "r", encoding="utf-8") as f:
+            self.app_list = json.load(f)
     
     def get_info(self):
         return {
@@ -249,6 +253,29 @@ class Package:
             app_tab = Frame(notebook)
             notebook.add(app_tab, text="🚀 下载应用")
 
+            app_title = Label(app_tab, text="下载应用", font=("Microsoft Yahei UI", 12))
+            app_title.grid(row=0, column=0, padx=10, pady=10)
+
+            # Application buttons
+            row = 1
+            column = 0
+            for app_name, app_info in self.app_list.items():
+                amd64_url = app_info[0]
+                win32_url = app_info[1]
+                
+                if amd64_url != False:
+                    app_button = Button(app_tab, text=f"下载 {app_name} (amd64)", command=lambda url=amd64_url: self.download_application(url, win32_url, app_name, "amd64"))
+                if win32_url != False:
+                    app_button = Button(app_tab, text=f"下载 {app_name} (win32)", command=lambda url=win32_url: self.download_application(amd64_url, url, app_name, "win32"))
+
+                app_button.grid(row=row, column=column, padx=10, pady=5, sticky="ew")
+                column += 1
+
+                if column >= 2:
+                    row += 1
+                    column = 0
+            
+            # Start the main loop
             window.mainloop()
         
         except Exception as e:
