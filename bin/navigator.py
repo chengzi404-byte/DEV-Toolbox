@@ -31,11 +31,11 @@ class Package:
         self.total = 100  # Total progress for the download, can be adjusted as needed
 
         # Loading pip libraries
-        with open(Path(__file__).parent / "pip.json", "r", encoding="utf-8") as f:
+        with open(Path(__file__).parent.parent / "asset" / "navigator" / "pip.json", "r", encoding="utf-8") as f:
             self.pip_libraries = json.load(f)
         
         # Load app list
-        with open(Path(__file__).parent / "app_url.json", "r", encoding="utf-8") as f:
+        with open(Path(__file__).parent.parent / "asset" / "navigator" / "app_url.json", "r", encoding="utf-8") as f:
             self.app_list = json.load(f)
     
     def get_info(self):
@@ -54,7 +54,7 @@ class Package:
         arm64_url = "https://mirrors.huaweicloud.com/python/3.13.7/python-3.13.7-arm64.exe"
         win32_url = "https://mirrors.huaweicloud.com/python/3.13.7/python-3.13.7.exe"
         
-        save_path = Path(__file__).parent.parent.parent / "downloads" / "python"
+        save_path = Path(__file__).parent.parent / "downloads" / "python"
 
         if not os.path.exists(save_path):
             os.makedirs(save_path)
@@ -115,7 +115,7 @@ class Package:
                 showerror("下载失败", f"下载 Python {bits} 失败: {e}")
 
     def download_application(self, amd64_url, win32_url, name, bits="amd64"):
-        save_path = Path(__file__).parent.parent.parent / "downloads" / name
+        save_path = Path(__file__).parent.parent / "downloads" / name
 
         if not os.path.exists(save_path):
             os.makedirs(save_path)
