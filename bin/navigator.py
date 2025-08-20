@@ -12,7 +12,7 @@ import platform
 import threading
 import json
 
-__ver__ = "v0.1.0"
+__ver__ = "v0.1.0 (last commit: 49ca003)"
 __package__ = "navigator"
 __author__ = "System"
 __email__ = "Remaining@2925.com"
