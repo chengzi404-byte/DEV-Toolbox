@@ -272,11 +272,26 @@ class Package:
                     row += 1
                     column = 0
             
+            # Help tab
+            help_tab = Frame(notebook)
+            notebook.add(help_tab, text="❓ 帮助")
+
+            version_label = Label(help_tab, text=f"Navigator 版本: {self.version}")
+            version_label.pack(pady=10)
+            author_label = Label(help_tab, text=f"作者: {self.author} ({self.email})")
+            author_label.pack(pady=10)
+            license_label = Label(help_tab, text=f"许可证: {self.license}")
+            license_label.pack(pady=10)
+            desc_label = Label(help_tab, text=self.description, wraplength=300, justify="left")
+            desc_label.pack(pady=10)
+            repo_label = Label(help_tab, text="源代码已在 Gitcode Github Gitee 三方平台上同步开放", wraplength=300, justify="left")
+            repo_label.pack(pady=10)
+
             # Start the main loop
             window.mainloop()
         
         except Exception as e:
-            showerror("错误", f"程序运行时发生错误: {e} \n\n 请在 Github 提交 issue 反馈。")
+            showerror("错误", f"程序运行时发生错误: {e} \n\n 请在 Github 提交 issue 反馈，我们会尽快处理。")
 
 if __name__ == "__main__":
     package = Package()
