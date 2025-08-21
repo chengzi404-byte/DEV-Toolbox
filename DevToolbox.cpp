@@ -308,7 +308,10 @@ int main(int argc, char *argv[]) {
         system("pip install --upgrade pip");
         cout << "Python package updated successfully." << endl;
         return 0;
-    } else {
+    } else if (argv[1] == "uninstall" && argv[2] == "python") {
+        cout << "Removing Python Libraries..." << endl;
+
+    }else {
         cout << "E: Unknown command '" << argv[1] << "'." << endl;
         cout << "Usage: DevToolbox <command>" << endl;
         cout << "Available commands: init, navigator" << endl;
