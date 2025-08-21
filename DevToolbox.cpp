@@ -2,6 +2,7 @@
 using namespace std;
 
 int main(int argc, char *argv[]) {
+    cout << argv[0] << endl;
     if (argv == nullptr || argv[0] == nullptr) {
         cout << "E: No command line arguments provided." << endl;
         cout << "Usage: DevToolbox <command>" << endl;
@@ -156,11 +157,11 @@ int main(int argc, char *argv[]) {
         system("pip install --upgrade pip");
         cout << "Python package updated successfully." << endl;
         return 0;
-    } else if (argv[1] == "navigator") {
+    } else if (argv[1] == "navigator") { // Open Navigator
         cout << "Opening Navigator..." << endl;
         system("bin/navigator.exe");
         return 0;
-    } else if (argv[1] == "update") {
+    } else if (argv[1] == "update") { // Update Python libraries
         cout << "Updating initlaze libraries..." << endl;
         system("pip install pyinstaller --upgrade ");
         system("pip install tqdm --upgrade ");
@@ -308,7 +309,7 @@ int main(int argc, char *argv[]) {
         system("pip install --upgrade pip");
         cout << "Python package updated successfully." << endl;
         return 0;
-    } else if (argv[1] == "uninstall" && argv[2] == "python") {
+    } else if (argv[1] == "uninstall" && (argv[2] == "-pl" || argv[2] == nullptr)) { // Remove python libraries
         cout << "Removing Python Libraries..." << endl;
         system("pip uninstall pyinstaller");
         system("pip uninstall tqdm");
@@ -451,7 +452,15 @@ int main(int argc, char *argv[]) {
         system("pip uninstall pyqt5");
         system("pip uninstall pyside2");
         system("pip uninstall kivy");
-    }else {
+    } else if (argv[1] == "uninstall" && (argv[2] == "-sf")) {
+        cout << "Removing all packages & core software. are you sure? (Y/n)" << endl;
+        char c;
+        cin >> c;
+        if (c == 'Y' || c == 'y')
+            system("rm ./*");
+        else
+            cout << "Control Cancel" << endl;
+    } else {
         cout << "E: Unknown command '" << argv[1] << "'." << endl;
         cout << "Usage: DevToolbox <command>" << endl;
         cout << "Available commands: init, navigator" << endl;
