@@ -1101,19 +1101,25 @@ class Package:
             editor_tab = Frame(notebook)
             notebook.add(editor_tab, text="📄 编辑器")
 
+            menu_pane = PanedWindow(editor_tab, orient="horizontal")
+            menu_pane.pack(fill="both", expand=True)
+
             self.theme_choose = Combobox(editor_tab, values=["Dark", "Light"])
-            self.theme_choose.pack(pady=10, padx=0)
+            menu_pane.add(self.theme_choose)
 
             apply_button = Button(editor_tab, text="确认", command=self.apply)
-            apply_button.pack(padx=30, pady=10)
+            menu_pane.add(apply_button)
 
-            text = Text(editor_tab, font="Consolas")
-            text.pack(expand=True)
+            run_button = Button(editor_tab, text="运行", command=self.run)
+            menu_pane.add(run_button)
 
-            self.highlighter = CodeHighlighter(text)
+            self.text = Text(editor_tab, font="Consolas")
+            self.text.pack(expand=True)
+
+            self.highlighter = CodeHighlighter(self.text)
             self.highlighter.highlight()
 
-            text.insert("end", '''"""\nPowered by Phoenix Editor\n"""\n''')
+            self.text.insert("end", '''"""\nPowered by Phoenix Editor\n"""\n''')
             
             # Help tab
             help_tab = Frame(notebook)
@@ -1156,6 +1162,16 @@ class Package:
         elif self.theme_choose.get() == "Light":
             self.highlighter.set_theme(Theme.Light)
         self.highlighter.highlight()
+
+    def run(self):
+        text_msg = self.text.get()
+
+        # Write in object 'temp'
+        with open("temp.py", "w", encoding="utf-8") as fp:
+            fp.write(text_msg)
+        
+        # Run object
+        os.system(f"python temp.py")
 
 if __name__ == "__main__":
     package = Package()
