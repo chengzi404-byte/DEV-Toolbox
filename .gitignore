@@ -1,2 +1,6 @@
 # files that start with a dot
 .*.*
+
+# build files
+build
+dist
