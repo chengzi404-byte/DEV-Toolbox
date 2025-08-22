@@ -1164,7 +1164,7 @@ class Package:
         self.highlighter.highlight()
 
     def run(self):
-        text_msg = self.text.get()
+        text_msg = self.text.get(0.0, "end")
 
         # Write in object 'temp'
         with open("temp.py", "w", encoding="utf-8") as fp:
