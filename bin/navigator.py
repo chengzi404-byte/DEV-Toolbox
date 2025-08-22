@@ -19,7 +19,7 @@ import tokenize
 import re
 
 
-__ver__ = "v0.1.2 (last commit: 49ca003)"
+__ver__ = "v1.0.2"
 __package__ = "navigator"
 __author__ = "System"
 __email__ = "Remaining@2925.com"
